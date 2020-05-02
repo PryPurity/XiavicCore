@@ -5,18 +5,15 @@ import com.github.prypurity.xiaviccore.Utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.block.Skull;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -51,11 +48,11 @@ public class HeadCommand implements TabExecutor {
             Utils.chat(commandSender, messages.getString("PlayerNotFound"));
             return false;
         }
-        ItemStack skull = new ItemStack(Material.SKELETON_SKULL);
+        ItemStack skull = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
         skullMeta.setOwningPlayer(target);
         skull.setItemMeta(skullMeta);
-        Utils.placeInMainHand(sender, skull); //TODO add a fail/success message.
+        Utils.placeInCursorSlot(sender, skull); //TODO add a fail/success message.
         return true;
     }
 

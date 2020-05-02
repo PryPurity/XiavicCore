@@ -24,7 +24,7 @@ public class SudoCommand implements TabExecutor {
 
     @Override //Target: /sudo <player> <command> [args]
     public boolean onCommand(@NotNull final CommandSender sender, @NotNull final Command command,
-                             @NotNull final String label, @NotNull final String[] args) {
+        @NotNull final String label, @NotNull final String[] args) {
         if (!sender.hasPermission(permissions.getString("Sudo")) || !sender.isOp()) {
             Utils.chat(sender, messages.getString("NoPerms"));
             return true;
@@ -45,6 +45,12 @@ public class SudoCommand implements TabExecutor {
             player.chat(message); //TODO Needs testing
             return true;
         }
+        final Command target = Bukkit.getPluginCommand(args[1]);
+        if (target == null) {
+            Utils.chat(player, messages.getString("NoSuchCommand"));
+            return true;
+        }
+        target.execute(player, args[0], Arrays.copyOfRange(args, 1, args.length - 1));
         return true;
     }
 
@@ -56,23 +62,24 @@ public class SudoCommand implements TabExecutor {
      * - The args of the command {@link Command#tabComplete(CommandSender, String, String[])}
      * {@inheritDoc}
      */
-    @Override
-    public @Nullable List<String> onTabComplete(@NotNull final CommandSender sender,
-                                                @NotNull final Command command, @NotNull final String unusedAlias,
-                                                @NotNull final String[] args) {
+    @Override public @Nullable List<String> onTabComplete(@NotNull final CommandSender sender,
+        @NotNull final Command command, @NotNull final String unusedAlias,
+        @NotNull final String[] args) {
+        //System.out.println(sender.isOp());
         if (!sender.hasPermission(permissions.getString("Sudo")) && !sender.isOp()) {
             return Collections.emptyList();
         }
         final Stream<? extends Command> commands =
-                Bukkit.getCommandAliases().keySet().parallelStream().map(Bukkit::getPluginCommand)
-                        .filter(Objects::nonNull).filter((cmd) -> {
-                    if (!sender.isOp()) {
-                        if (cmd.getPermission() != null) {
-                            return sender.hasPermission(cmd.getPermission());
-                        }
+            Bukkit.getCommandAliases().keySet().stream().map(Bukkit::getPluginCommand)
+                .filter(Objects::nonNull).filter((cmd) -> {
+                if (!sender.isOp()) {
+                    if (cmd.getPermission() != null) {
+                        return sender.hasPermission(cmd.getPermission());
                     }
-                    return true;
-                }); //Get all commands.
+                }
+                return true;
+            }); //Get all commands.
+        //System.out.println(Bukkit.getCommandAliases().keySet());
 
         final Iterator<? extends Command> iterator = commands.iterator();
         Collection<String> combined = new HashSet<>();
@@ -87,33 +94,34 @@ public class SudoCommand implements TabExecutor {
             case 0:
                 ret = Bukkit.getOnlinePlayers().stream().map(Player::getName);
                 break;
-            case 1: //If no args after player decleration, tab complete all commands which the player has perms for. Which means break-ing here.
-                ret = Bukkit.getOnlinePlayers().stream().map(Player::getName).filter(name -> name.startsWith(args[0]) || name.equalsIgnoreCase(args[0]));
+            case 1: //Tab complete player names.
+                ret = Bukkit.getOnlinePlayers().stream().map(Player::getName)
+                    .filter(name -> name.startsWith(args[0]) || name.equalsIgnoreCase(args[0]));
                 break;
-            case 2:
+            case 2:  //If no args after player decleration, tab complete all commands which the player has perms for.
                 //Start filtering commands and aliases.
-                final String target = args[1];
-                if (target.isEmpty()) {
+                final String targetCommand = args[1];
+                if (targetCommand.isEmpty()) {
                     break;
                 }
-                if (target.equalsIgnoreCase("s:")) {
+                if (targetCommand.equalsIgnoreCase("s:")) {
                     ret = Stream.empty();
                     break;
                 }
                 //Filter by if the command/alias starts with the target string passed.
-                ret = ret.filter(str -> str.startsWith(target));
+                ret = ret.filter(
+                    str -> str.startsWith(targetCommand) || str.equalsIgnoreCase(targetCommand));
                 break;
             default: //If arg length > 2 then tab based off the known command.
                 final Player targetPlayer = Bukkit.getPlayer(args[0]);
                 final PluginCommand pluginCommand =
-                        Bukkit.getPluginCommand(args[1]); //args[1] is the target command.
+                    Bukkit.getPluginCommand(args[1]); //args[1] is the target command.
                 if (pluginCommand == null) {
                     return Collections.emptyList();
                 }
-                ret = targetPlayer == null ?
-                        Stream.empty() : //If player is null --> empty stream.
-                        pluginCommand.tabComplete(targetPlayer, unusedAlias,
-                                Arrays.copyOfRange(args, 2, args.length - 1)).stream();
+                ret = targetPlayer == null ? Stream.empty() : //If player is null --> empty stream.
+                    pluginCommand.tabComplete(targetPlayer, unusedAlias,
+                        Arrays.copyOfRange(args, 2, args.length - 1)).stream();
         }
         //Returns the alphabetically sorted results.
         return ret.sorted(Comparator.naturalOrder()).collect(Collectors.toList());

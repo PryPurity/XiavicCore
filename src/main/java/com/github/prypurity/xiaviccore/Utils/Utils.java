@@ -39,7 +39,7 @@ public class Utils {
      * @param itemStack The {@link ItemStack} to replace - if null, air will be set instead.
      * @return Returns whether or not the swap was successful.
      */
-    public static boolean placeInMainHand(@NotNull final Player player, @Nullable final ItemStack itemStack) {
+    public static boolean placeInCursorSlot(@NotNull final Player player, @Nullable final ItemStack itemStack) {
         final PlayerInventory inventory = player.getInventory();
         final int firstEmpty = inventory.firstEmpty();
         if (firstEmpty == -1) {

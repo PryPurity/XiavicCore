@@ -41,6 +41,10 @@ public class WorldCommand implements TabExecutor {
             Utils.chat(commandSender, mustBePlayer);
             return false;
         }
+        if (strings.length < 1) {
+            Utils.chat(commandSender, messages.getString("SpecifyTarget"));
+            return true;
+        }
         final World world = Bukkit.getWorld(strings[0]);
         if (world == null) {
             Utils.chat(commandSender, noSuchWorld);
