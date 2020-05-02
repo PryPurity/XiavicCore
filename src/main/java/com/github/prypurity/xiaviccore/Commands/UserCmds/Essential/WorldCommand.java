@@ -14,6 +14,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Represents the command for /world - to change worlds.
  */
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -57,6 +58,9 @@ public class WorldCommand implements TabExecutor {
     @Override public @Nullable List<String> onTabComplete(
         @NotNull final CommandSender commandSender, @NotNull final Command command,
         @NotNull final String s, @NotNull final String[] strings) {
+        if (!commandSender.hasPermission(permission) || !commandSender.isOp()) {
+            return Collections.emptyList();
+        }
         Stream<String> worlds = Bukkit.getWorlds().stream().map(World::getName);
         if (strings.length > 0) {
             worlds = worlds.filter(worldName -> worldName.startsWith(strings[0]));

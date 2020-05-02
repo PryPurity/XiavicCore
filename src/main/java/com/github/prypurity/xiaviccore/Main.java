@@ -98,6 +98,7 @@ public final class Main extends JavaPlugin {
         getCommand("god").setExecutor(new GodCommand());
         getCommand("grindstone").setExecutor(new GrindstoneCommand());
         getCommand("heal").setExecutor(new HealCommand());
+        getCommand("head").setExecutor(new HeadCommand());
         getCommand("info").setExecutor(new ItemInfoCommand());
         getCommand("loom").setExecutor(new LoomCommand());
         getCommand("more").setExecutor(new MoreCommand());
