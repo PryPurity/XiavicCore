@@ -121,6 +121,7 @@ public final class Main extends JavaPlugin {
         getCommand("walkspeed").setExecutor(new WalkSpeedCommand());
         getCommand("website").setExecutor(new WebsiteCommand());
         getCommand("whois").setExecutor(new WhoIsCommand());
+        getCommand("world").setExecutor(new WorldCommand());
         getCommand("workbench").setExecutor(new WorkbenchCommand());
         getCommand("youtube").setExecutor(new YoutubeCommand());
     }

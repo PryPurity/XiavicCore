@@ -25,7 +25,7 @@ public class WorldCommand implements TabExecutor {
     private static final String permission = permissions.getString("World");
     private static final String noPermission = permissions.getString("NoPerms");
     private static final String noSuchWorld = messages.getString("NoSuchWorld");
-    private static final String mustBePlayer = messages.getString("PlayerOnly");
+    private static final String mustBePlayer = messages.getString("SenderNotPlayer");
     private static final String tpFailure = messages.getString("Tp_Failed");
 
     @Override public boolean onCommand(@NotNull final CommandSender commandSender,
