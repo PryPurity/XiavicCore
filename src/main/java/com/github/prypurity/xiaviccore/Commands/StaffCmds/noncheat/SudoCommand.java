@@ -38,11 +38,11 @@ public class SudoCommand implements TabExecutor {
             return true;
         }
         if (args[1].equalsIgnoreCase("s:")) { //Send chat message as the player.
-            String message = "";
+            StringBuilder builder = new StringBuilder();
             for (int index = 2; index < args.length; ) {
-                message = message.concat(args[index++]).concat(" ");
+                builder.append(args[index++]);
             }
-            player.chat(message); //TODO Needs testing
+            player.chat(builder.toString()); //TODO Needs testing
             return true;
         }
         final Command target = Bukkit.getPluginCommand(args[1]);
