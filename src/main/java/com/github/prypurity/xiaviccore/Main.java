@@ -2,6 +2,7 @@ package com.github.prypurity.xiaviccore;
 
 import com.github.prypurity.xiaviccore.Commands.StaffCmds.cheats.CheatArmor;
 import com.github.prypurity.xiaviccore.Commands.StaffCmds.cheats.CheatEXP;
+import com.github.prypurity.xiaviccore.Commands.StaffCmds.cheats.SudoCommand;
 import com.github.prypurity.xiaviccore.Commands.StaffCmds.noncheat.*;
 import com.github.prypurity.xiaviccore.Commands.StaffCmds.noncheat.teleport.TPPosCommand;
 import com.github.prypurity.xiaviccore.Commands.StaffCmds.noncheat.teleport.TPhereCommand;
@@ -109,6 +110,7 @@ public final class Main extends JavaPlugin {
         getCommand("setspawn").setExecutor(new SpawnSetCommand());
         getCommand("spawn").setExecutor(new SpawnCommand());
         getCommand("stonecutter").setExecutor(new StonecutterCommand());
+        getCommand("sudo").setExecutor(new SudoCommand());
         getCommand("suicide").setExecutor(new SuicideCommand());
         getCommand("top").setExecutor(new TopCommand());
         getCommand("tp").setExecutor(new TeleportCommand());
