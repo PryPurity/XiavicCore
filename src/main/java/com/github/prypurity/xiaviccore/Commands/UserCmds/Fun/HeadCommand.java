@@ -1,5 +1,6 @@
 package com.github.prypurity.xiaviccore.Commands.UserCmds.Fun;
 
+import com.github.prypurity.xiaviccore.Main;
 import com.github.prypurity.xiaviccore.Utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -15,6 +16,8 @@ import org.bukkit.inventory.meta.SkullMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,6 +29,10 @@ import static com.github.prypurity.xiaviccore.Main.messages;
  * Represents the command used to obtain a head for a given player.
  */
 public class HeadCommand implements TabExecutor {
+
+    public HeadCommand() {
+        Main.getInstance().getCommand("head").setAliases(Collections.singletonList("skull"));
+    }
 
     @Override public boolean onCommand(@NotNull final CommandSender commandSender,
         @NotNull final Command command, @NotNull final String s, @NotNull final String[] strings) {
