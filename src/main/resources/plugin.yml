@@ -166,3 +166,6 @@ commands:
   head:
     usage: a
     description: a
+  repair:
+    usage: a
+    description: a
