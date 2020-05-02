@@ -1,7 +1,7 @@
 package com.github.prypurity.xiaviccore.Commands.UserCmds.Fun;
 
-import com.github.prypurity.xiaviccore.Utils.Utils;
 import com.github.prypurity.xiaviccore.Main;
+import com.github.prypurity.xiaviccore.Utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -31,20 +31,20 @@ public class NearCommand implements CommandExecutor {
                     }
                 }
                 if (found) {
-                    player.sendMessage(Utils.chat("List of nearby players:"));
+                    Utils.chat(player, "List of nearby players:");
                     for (String s : nearbyPlayers) {
-                        player.sendMessage(Utils.chat(s));
+                        Utils.chat(player, s);
                     }
                 } else {
-                    player.sendMessage("No players are nearby!");
+                    Utils.chat(player, "No players are nearby!");
                 }
                 return true;
             } else {
-                player.sendMessage(Utils.chat(Main.messages.getString("NoPerms")));
+                Utils.chat(player, Main.messages.getString("NoPerms"));
             }
             return true;
         } else {
-            sender.sendMessage(Utils.chat(Main.messages.getString("SenderNotPlayer")));
+            Utils.chat(sender, Main.messages.getString("SenderNotPlayer"));
         }
         return false;
     }

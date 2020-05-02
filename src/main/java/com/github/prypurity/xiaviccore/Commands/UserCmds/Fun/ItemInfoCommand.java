@@ -1,45 +1,44 @@
 package com.github.prypurity.xiaviccore.Commands.UserCmds.Fun;
 
-import com.github.prypurity.xiaviccore.Utils.Utils;
 import com.github.prypurity.xiaviccore.Main;
+import com.github.prypurity.xiaviccore.Utils.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import java.util.Map;
 
-// TODO: Fix THESE UTIL.CHAT() calls
+import java.util.Map;
 
 public class ItemInfoCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            Player pl = (Player) sender;
-            if (pl.hasPermission(Main.permissions.getString("ItemInfo")) || pl.isOp()) {
-                if (!pl.getInventory().getItemInMainHand().getType().isAir()) {
-                    pl.sendMessage(Utils.chat(" "));
-                    if (pl.getInventory().getItemInMainHand().getItemMeta().hasDisplayName()) {
-                        pl.sendMessage(Utils.chat("&eItem Meta: &b" + pl.getInventory().getItemInMainHand().getItemMeta().getDisplayName()));
+            Player player = (Player) sender;
+            if (player.hasPermission(Main.permissions.getString("ItemInfo")) || player.isOp()) {
+                if (!player.getInventory().getItemInMainHand().getType().isAir()) {
+                    Utils.chat(player, " ");
+                    if (player.getInventory().getItemInMainHand().getItemMeta().hasDisplayName()) {
+                        Utils.chat(player, "&eItem Meta: &b" + player.getInventory().getItemInMainHand().getItemMeta().getDisplayName());
                     }
-                    pl.sendMessage(Utils.chat("&eMinecraft Name: &b" + pl.getInventory().getItemInMainHand().getType().name()));
-                    pl.sendMessage(Utils.chat("&eMax Stack: &b" + pl.getInventory().getItemInMainHand().getMaxStackSize()));
-                    if (!pl.getInventory().getItemInMainHand().getEnchantments().isEmpty()) {
-                        pl.sendMessage(Utils.chat("&eItem Enchantments: &c ===================================="));
-                        Map<Enchantment, Integer> ench = pl.getInventory().getItemInMainHand().getEnchantments();
+                    Utils.chat(player, "&eMinecraft Name: &b" + player.getInventory().getItemInMainHand().getType().name());
+                    Utils.chat(player, "&eMax Stack: &b" + player.getInventory().getItemInMainHand().getMaxStackSize());
+                    if (!player.getInventory().getItemInMainHand().getEnchantments().isEmpty()) {
+                        Utils.chat(player, "&eItem Enchantments: &c ====================================");
+                        Map<Enchantment, Integer> ench = player.getInventory().getItemInMainHand().getEnchantments();
                         for (Map.Entry<Enchantment, Integer> e : ench.entrySet()) {
                             String str = e.getKey().getKey().getKey().replace("_", " ");
                             String name = str.substring(0, 1).toUpperCase() + str.substring(1);
                             int level = e.getValue();
                             String output = "      &b" + name + " : " + level;
-                            Utils.chat(pl, output);
+                            Utils.chat(player, output);
                         }
                     }
                 } else {
                     Utils.chat(Main.messages.getString("ItemIsAir"));
                 }
             } else {
-                Utils.chat(pl, Main.messages.getString("NoPerms"));
+                Utils.chat(player, Main.messages.getString("NoPerms"));
             }
             return true;
         }

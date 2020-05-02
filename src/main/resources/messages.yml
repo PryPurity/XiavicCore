@@ -83,6 +83,7 @@ Whatsthis_AtTarget: "You have cursed %target%."
 Wheather: "&eThe server's current weather is, &c%weather%"
 WheatherChanged: "&aYou have changed the weather to, &e%weather%"
 World: "&bYou have been teleported to the spawn of %world%"
+
 # How 2 Use Messages a.k.a. Help Text
 WhoIsHelp: "/whois <player>"
 
