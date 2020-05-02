@@ -18,6 +18,7 @@
 ##############################
 
 # Player Commands
+Afk: "Xiavic.player.afk"
 Back: "Xiavic.player.back"
 Cartography: "Xiavic.player.cartography"
 Dispose: "Xiavic.player.dispose"

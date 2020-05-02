@@ -7,6 +7,9 @@ authors: [Imhandmade, Kerlab, VottusCode]
 description: A
 website: A
 commands:
+  afk:
+    usage: A
+    description: A
   clear:
     usage: A
     description: A
@@ -84,6 +87,9 @@ commands:
     usage: aA
     description: a
     aliases: iteminfo
+  sudo:
+    usage: a
+    description: a
   serverinfo:
     usage: a
     description: a
@@ -143,6 +149,9 @@ commands:
     usage: a
     description: a
     aliases: [wb, craftingtable]
+  world:
+    usage: a
+    description: a
   loom:
     usage: a
     description: a

@@ -12,6 +12,8 @@ import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.concurrent.TimeUnit;
+
 public class Utils {
 
     //EZ Chat Colors
@@ -48,6 +50,14 @@ public class Utils {
         inventory.setItem(firstEmpty, inventory.getItem(held));
         inventory.setItem(held, itemStack == null ? null : itemStack.clone());
         return true;
+    }
+
+    public static long toTicks(final long duration, final TimeUnit timeUnit) {
+        return TimeUnit.MILLISECONDS.convert(duration, timeUnit) * 50; //Each tick is 50ms
+    }
+
+    public static long fromTicks(final long ticks, final TimeUnit timeUnit) {
+        return timeUnit.convert(ticks / 50, timeUnit);
     }
 
     @Deprecated

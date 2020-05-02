@@ -20,6 +20,7 @@ import com.github.prypurity.xiaviccore.Commands.UserCmds.Fun.Links.*;
 import com.github.prypurity.xiaviccore.Utils.EquipAnything.EquipEvents;
 import com.github.prypurity.xiaviccore.Utils.Files.Messages;
 import com.github.prypurity.xiaviccore.Utils.Files.Permissions;
+import com.github.prypurity.xiaviccore.Utils.Listeners.AFKHandler;
 import com.github.prypurity.xiaviccore.Utils.Listeners.JoinQuit;
 import com.github.prypurity.xiaviccore.Utils.Listeners.RespawnEvent;
 import com.github.prypurity.xiaviccore.Utils.Listeners.TeleportHandler;
@@ -78,6 +79,7 @@ public final class Main extends JavaPlugin {
     private void registerCommands() {
         //getCommand("fireball").setExecutor(new FireBallCommand());
         getCommand("argh").setExecutor(new ArghCommand());
+        getCommand("afk").setExecutor(new AFKCommand());
         getCommand("back").setExecutor(new BackCommand());
         getCommand("cartography").setExecutor(new CartographyCommand());
         getCommand("cheatarmor").setExecutor(new CheatArmor());
@@ -135,6 +137,7 @@ public final class Main extends JavaPlugin {
         pm.registerEvents(new EquipEvents(), this);
         pm.registerEvents(new RespawnEvent(), this);
         pm.registerEvents(teleportHandler, this);
+        AFKHandler.INSTANCE.registerTicker();
     }
 
     // Use this function for creating new shit
