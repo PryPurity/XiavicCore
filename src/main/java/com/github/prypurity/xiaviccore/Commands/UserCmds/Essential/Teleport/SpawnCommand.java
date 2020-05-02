@@ -13,8 +13,6 @@ import org.bukkit.entity.Player;
 
 public class SpawnCommand implements CommandExecutor {
 
-    TeleportHandler teleportHandler;
-
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
@@ -24,7 +22,7 @@ public class SpawnCommand implements CommandExecutor {
             if (player.hasPermission(Main.permissions.getString("SpawnOthers")) || player.isOp()) {
                 Player target = Bukkit.getPlayer(args[0]);
                 if (target != null) {
-                    teleportHandler.teleport(target, l);
+                    TeleportHandler.teleport(target, l);
                     return true;
                 } else {
                     Utils.chat(player, Main.messages.getString("PlayerNotFound"));
@@ -33,7 +31,7 @@ public class SpawnCommand implements CommandExecutor {
             Utils.chat(player, Main.messages.getString("NoPerms"));
         } else {
             if (player.hasPermission(Main.permissions.getString("Spawn")) || player.isOp()) {
-                teleportHandler.teleport(player, l);
+                TeleportHandler.teleport(player, l);
                 return true;
             }
             Utils.chat(player, Main.messages.getString("NoPerms"));

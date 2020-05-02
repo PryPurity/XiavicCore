@@ -14,7 +14,6 @@ import org.bukkit.entity.Player;
 
 public class RandomTPCommand implements CommandExecutor {
     Main plugin = Main.getInstance();
-    TeleportHandler teleportHandler;
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -26,7 +25,7 @@ public class RandomTPCommand implements CommandExecutor {
                 double randomY = player.getWorld().getHighestBlockYAt((int) randomX, (int) randomZ) + 1.5;
                 Location rtp = new Location(player.getWorld(), randomX, randomY, randomZ);
 //                player.teleport(rtp);
-                teleportHandler.teleport(player, rtp);
+                TeleportHandler.teleport(player, rtp);
                 Utils.chat(player, Main.messages.getString("RTP"));
                 Block block = rtp.getBlock().getRelative(0, -1, 0);
                 if (block.getType().equals(Material.WATER) || block.getType().equals(Material.LAVA)) {

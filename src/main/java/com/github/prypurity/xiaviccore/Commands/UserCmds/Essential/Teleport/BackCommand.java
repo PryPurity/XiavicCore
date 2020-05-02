@@ -9,7 +9,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class BackCommand implements CommandExecutor {
-    TeleportHandler teleportHandler;
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
@@ -17,7 +16,7 @@ public class BackCommand implements CommandExecutor {
             Player player = (Player) commandSender;
             if (player.hasPermission(Main.permissions.getString("Back")) || player.isOp()) {
                 try {
-                    teleportHandler.teleport(player, teleportHandler.getLastLocation(player));
+                    TeleportHandler.teleport(player, TeleportHandler.getLastLocation(player));
                 } catch (Exception e) {
                     Utils.chat(player, Main.messages.getString("BackNone"));
                 }
