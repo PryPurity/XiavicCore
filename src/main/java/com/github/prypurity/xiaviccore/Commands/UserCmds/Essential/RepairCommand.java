@@ -38,7 +38,7 @@ public class RepairCommand implements CommandExecutor {
             message = messages.getString("Repair_Failure");
         }
         Utils.chat(sender, message);
-        return false;
+        return true;
     }
 
     private boolean doRepair(ItemStack itemStack) {
@@ -48,6 +48,7 @@ public class RepairCommand implements CommandExecutor {
         }
         Damageable damageable = (Damageable) meta;
         damageable.setDamage(0);
-        return itemStack.setItemMeta(meta);
+        itemStack.setItemMeta(meta);
+        return true;
     }
 }

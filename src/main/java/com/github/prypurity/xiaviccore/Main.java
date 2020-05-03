@@ -108,6 +108,7 @@ public final class Main extends JavaPlugin {
         getCommand("near").setExecutor(new NearCommand());
         getCommand("pony").setExecutor(new PonyCommand());
         getCommand("rtp").setExecutor(new RandomTPCommand());
+        getCommand("repair").setExecutor(new RepairCommand());
         getCommand("setfirstspawn").setExecutor(new FirstSpawnSetCommand());
         getCommand("setspawn").setExecutor(new SpawnSetCommand());
         getCommand("spawn").setExecutor(new SpawnCommand());
