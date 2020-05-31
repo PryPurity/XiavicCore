@@ -1,3 +1,6 @@
+# UPDATED GITHUB LOCATION: https://github.com/Xiavic/Xiavic-Essentials
+
+
 # Xiavic Core
 Here you will see the worst code that FIVE idiots can come up with in their free time
 
